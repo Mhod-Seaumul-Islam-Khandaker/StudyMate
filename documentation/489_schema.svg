@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE svg
+PUBLIC "-//W3C//DTD SVG 1.1//EN"
+       "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg viewBox="18 -10 825 421" width="807px" height="431px" xmlns="http://www.w3.org/2000/svg" version="1.1">
+   <line x1="320" y1="124" x2="310" y2="124" style="stroke:#b0b;stroke-width:1;"/>
+   <line x1="309" y1="336" x2="319" y2="336" style="stroke:#b0b;stroke-width:1;"/>
+   <line x1="310" y1="124" x2="309" y2="336" style="stroke:#b0b;stroke-width:1;"/>
+   <line x1="312.5" y1="124" x2="316.03553390593" y2="127.53553390593" style="stroke:#b0b;stroke-width:2;"/>
+   <line x1="312.5" y1="124" x2="316.03553390593" y2="120.46446609407" style="stroke:#b0b;stroke-width:2;"/>
+   <line x1="314" y1="336" x2="310.46446609407" y2="339.53553390593" style="stroke:#b0b;stroke-width:2;"/>
+   <line x1="314" y1="336" x2="310.46446609407" y2="332.46446609407" style="stroke:#b0b;stroke-width:2;"/>
+   <line x1="715" y1="273" x2="705" y2="273" style="stroke:#bbb;stroke-width:1;"/>
+   <line x1="407" y1="336" x2="397" y2="336" style="stroke:#bbb;stroke-width:1;"/>
+   <line x1="705" y1="273" x2="407" y2="336" style="stroke:#bbb;stroke-width:1;"/>
+   <line x1="707.5" y1="273" x2="711.03553390593" y2="276.53553390593" style="stroke:#bbb;stroke-width:2;"/>
+   <line x1="707.5" y1="273" x2="711.03553390593" y2="269.46446609407" style="stroke:#bbb;stroke-width:2;"/>
+   <line x1="402" y1="336" x2="405.53553390593" y2="339.53553390593" style="stroke:#bbb;stroke-width:2;"/>
+   <line x1="402" y1="336" x2="405.53553390593" y2="332.46446609407" style="stroke:#bbb;stroke-width:2;"/>
+   <line x1="617" y1="155" x2="607" y2="155" style="stroke:#bbb;stroke-width:1;"/>
+   <line x1="407" y1="336" x2="397" y2="336" style="stroke:#bbb;stroke-width:1;"/>
+   <line x1="607" y1="155" x2="407" y2="336" style="stroke:#bbb;stroke-width:1;"/>
+   <line x1="609.5" y1="155" x2="613.03553390593" y2="158.53553390593" style="stroke:#bbb;stroke-width:2;"/>
+   <line x1="609.5" y1="155" x2="613.03553390593" y2="151.46446609407" style="stroke:#bbb;stroke-width:2;"/>
+   <line x1="402" y1="336" x2="405.53553390593" y2="339.53553390593" style="stroke:#bbb;stroke-width:2;"/>
+   <line x1="402" y1="336" x2="405.53553390593" y2="332.46446609407" style="stroke:#bbb;stroke-width:2;"/>
+   <line x1="101" y1="135" x2="111" y2="135" style="stroke:#b0b;stroke-width:1;"/>
+   <line x1="309" y1="336" x2="319" y2="336" style="stroke:#b0b;stroke-width:1;"/>
+   <line x1="111" y1="135" x2="309" y2="336" style="stroke:#b0b;stroke-width:1;"/>
+   <line x1="108.5" y1="135" x2="104.96446609407" y2="138.53553390593" style="stroke:#b0b;stroke-width:2;"/>
+   <line x1="108.5" y1="135" x2="104.96446609407" y2="131.46446609407" style="stroke:#b0b;stroke-width:2;"/>
+   <line x1="314" y1="336" x2="310.46446609407" y2="339.53553390593" style="stroke:#b0b;stroke-width:2;"/>
+   <line x1="314" y1="336" x2="310.46446609407" y2="332.46446609407" style="stroke:#b0b;stroke-width:2;"/>
+   <rect width="80" height="20" x="320" y="34" style="fill:#007;stroke:black;"/>
+   <text width="80" height="20" x="325" y="48" style="fill:#fff;" font-family="Arial" font-size="16px"> goals</text>
+   <rect width="80" height="20" x="320" y="54" style="fill:#aea;stroke:black;"/>
+   <text width="80" height="20" x="325" y="68" style="fill:black;" font-family="Arial" font-size="16px">id</text>
+   <rect width="80" height="20" x="320" y="74" style="fill:none;stroke:black;"/>
+   <text width="80" height="20" x="325" y="88" style="fill:black;" font-family="Arial" font-size="16px">statement</text>
+   <rect width="80" height="20" x="320" y="94" style="fill:none;stroke:black;"/>
+   <text width="80" height="20" x="325" y="108" style="fill:black;" font-family="Arial" font-size="16px">status</text>
+   <rect width="80" height="20" x="320" y="114" style="fill:none;stroke:black;"/>
+   <text width="80" height="20" x="325" y="128" style="fill:black;" font-family="Arial" font-size="16px">user_id</text>
+   <rect width="95" height="20" x="715" y="203" style="fill:#007;stroke:black;"/>
+   <text width="95" height="20" x="720" y="217" style="fill:#fff;" font-family="Arial" font-size="16px"> notifications</text>
+   <rect width="95" height="20" x="715" y="223" style="fill:#aea;stroke:black;"/>
+   <text width="95" height="20" x="720" y="237" style="fill:black;" font-family="Arial" font-size="16px">id</text>
+   <rect width="95" height="20" x="715" y="243" style="fill:none;stroke:black;"/>
+   <text width="95" height="20" x="720" y="257" style="fill:black;" font-family="Arial" font-size="16px">text</text>
+   <rect width="95" height="20" x="715" y="263" style="fill:none;stroke:black;"/>
+   <text width="95" height="20" x="720" y="277" style="fill:black;" font-family="Arial" font-size="16px">user_id</text>
+   <rect width="95" height="20" x="715" y="283" style="fill:none;stroke:black;"/>
+   <text width="95" height="20" x="720" y="297" style="fill:black;" font-family="Arial" font-size="16px">is_read</text>
+   <rect width="95" height="20" x="715" y="303" style="fill:none;stroke:black;"/>
+   <text width="95" height="20" x="720" y="317" style="fill:black;" font-family="Arial" font-size="16px">created_at</text>
+   <rect width="88" height="20" x="617" y="5" style="fill:#007;stroke:black;"/>
+   <text width="88" height="20" x="622" y="19" style="fill:#fff;" font-family="Arial" font-size="16px"> tasklist</text>
+   <rect width="88" height="20" x="617" y="25" style="fill:#aea;stroke:black;"/>
+   <text width="88" height="20" x="622" y="39" style="fill:black;" font-family="Arial" font-size="16px">id</text>
+   <rect width="88" height="20" x="617" y="45" style="fill:none;stroke:black;"/>
+   <text width="88" height="20" x="622" y="59" style="fill:black;" font-family="Arial" font-size="16px">title</text>
+   <rect width="88" height="20" x="617" y="65" style="fill:none;stroke:black;"/>
+   <text width="88" height="20" x="622" y="79" style="fill:black;" font-family="Arial" font-size="16px">description</text>
+   <rect width="88" height="20" x="617" y="85" style="fill:none;stroke:black;"/>
+   <text width="88" height="20" x="622" y="99" style="fill:black;" font-family="Arial" font-size="16px">status</text>
+   <rect width="88" height="20" x="617" y="105" style="fill:none;stroke:black;"/>
+   <text width="88" height="20" x="622" y="119" style="fill:black;" font-family="Arial" font-size="16px">due_date</text>
+   <rect width="88" height="20" x="617" y="125" style="fill:none;stroke:black;"/>
+   <text width="88" height="20" x="622" y="139" style="fill:black;" font-family="Arial" font-size="16px">priority</text>
+   <rect width="88" height="20" x="617" y="145" style="fill:none;stroke:black;"/>
+   <text width="88" height="20" x="622" y="159" style="fill:black;" font-family="Arial" font-size="16px">user_id</text>
+   <rect width="68" height="20" x="33" y="45" style="fill:#007;stroke:black;"/>
+   <text width="68" height="20" x="38" y="59" style="fill:#fff;" font-family="Arial" font-size="16px"> timers</text>
+   <rect width="68" height="20" x="33" y="65" style="fill:#aea;stroke:black;"/>
+   <text width="68" height="20" x="38" y="79" style="fill:black;" font-family="Arial" font-size="16px">id</text>
+   <rect width="68" height="20" x="33" y="85" style="fill:none;stroke:black;"/>
+   <text width="68" height="20" x="38" y="99" style="fill:black;" font-family="Arial" font-size="16px">duration</text>
+   <rect width="68" height="20" x="33" y="105" style="fill:none;stroke:black;"/>
+   <text width="68" height="20" x="38" y="119" style="fill:black;" font-family="Arial" font-size="16px">status</text>
+   <rect width="68" height="20" x="33" y="125" style="fill:none;stroke:black;"/>
+   <text width="68" height="20" x="38" y="139" style="fill:black;" font-family="Arial" font-size="16px">user_id</text>
+   <rect width="78" height="20" x="319" y="306" style="fill:#007;stroke:black;"/>
+   <text width="78" height="20" x="324" y="320" style="fill:#fff;" font-family="Arial" font-size="16px"> users</text>
+   <rect width="78" height="20" x="319" y="326" style="fill:#aea;stroke:black;"/>
+   <text width="78" height="20" x="324" y="340" style="fill:black;" font-family="Arial" font-size="16px">id</text>
+   <rect width="78" height="20" x="319" y="346" style="fill:none;stroke:black;"/>
+   <text width="78" height="20" x="324" y="360" style="fill:black;" font-family="Arial" font-size="16px">name</text>
+   <rect width="78" height="20" x="319" y="366" style="fill:none;stroke:black;"/>
+   <text width="78" height="20" x="324" y="380" style="fill:black;" font-family="Arial" font-size="16px">email</text>
+   <rect width="78" height="20" x="319" y="386" style="fill:none;stroke:black;"/>
+   <text width="78" height="20" x="324" y="400" style="fill:black;" font-family="Arial" font-size="16px">password</text>
+</svg>
