@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Progress Report</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        dark: {
+                            100: '#1e293b',
+                            200: '#0f172a',
+                            300: '#020617',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-dark-300 min-h-screen text-gray-200">
+    <div class="container mx-auto px-4 py-8">
+        <!-- Header -->
+        <header class="mb-8">
+            <div class="flex justify-between items-center">
+                <div>
+                    <h1 class="text-2xl font-bold text-white">Progress Report</h1>
+                    <p class="text-gray-400">Track your learning journey and achievements</p>
+                </div>
+                <a href="index.html" class="bg-dark-200 hover:bg-dark-100 px-4 py-2 rounded-lg transition-colors">
+                    ← Back to Dashboard
+                </a>
+            </div>
+        </header>
+
+        <!-- Main Content -->
+        <div class="grid grid-cols-1 lg:grid-cols-4 gap-6">
+            <!-- Main Content Area -->
+            <div class="lg:col-span-3 space-y-6">
+                <!-- Overview Cards -->
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    <!-- Total Study Time -->
+                    <div class="bg-dark-200 rounded-xl p-6 shadow-lg">
+                        <div class="flex items-center justify-between">
+                            <div>
+                                <p class="text-gray-400 text-sm">Total Study Time</p>
+                                <h3 class="text-2xl font-bold text-white mt-1">42h 15m</h3>
+                            </div>
+                            <div class="w-12 h-12 bg-blue-500/20 rounded-lg flex items-center justify-center">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-blue-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+                                </svg>
+                            </div>
+                        </div>
+                        <p class="text-green-400 text-sm mt-2">↑ 12% from last week</p>
+                    </div>
+
+                    <!-- Completed Tasks -->
+                    <div class="bg-dark-200 rounded-xl p-6 shadow-lg">
+                        <div class="flex items-center justify-between">
+                            <div>
+                                <p class="text-gray-400 text-sm">Completed Tasks</p>
+                                <h3 class="text-2xl font-bold text-white mt-1">28/35</h3>
+                            </div>
+                            <div class="w-12 h-12 bg-green-500/20 rounded-lg flex items-center justify-center">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-green-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                                </svg>
+                            </div>
+                        </div>
+                        <p class="text-green-400 text-sm mt-2">80% completion rate</p>
+                    </div>
+
+                    <!-- Current Streak -->
+                    <div class="bg-dark-200 rounded-xl p-6 shadow-lg">
+                        <div class="flex items-center justify-between">
+                            <div>
+                                <p class="text-gray-400 text-sm">Current Streak</p>
+                                <h3 class="text-2xl font-bold text-white mt-1">14 days</h3>
+                            </div>
+                            <div class="w-12 h-12 bg-red-500/20 rounded-lg flex items-center justify-center">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-red-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 18.657A8 8 0 016.343 7.343S7 9 9 10c0-2 .5-5 2.986-7C14 5 16.09 5.777 17.656 7.343A7.975 7.975 0 0120 13a7.975 7.975 0 01-2.343 5.657z" />
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.879 16.121A3 3 0 1012.015 11L11 14H9c0 .768.293 1.536.879 2.121z" />
+                                </svg>
+                            </div>
+                        </div>
+                        <p class="text-green-400 text-sm mt-2">Keep it up!</p>
+                    </div>
+                </div>
+
+                <!-- Study Time Chart -->
+                <div class="bg-dark-200 rounded-xl p-6 shadow-lg">
+                    <div class="flex justify-between items-center mb-6">
+                        <h2 class="text-xl font-semibold text-white">Study Time Overview</h2>
+                        <select class="bg-dark-100 border border-gray-600 rounded-lg px-3 py-2 text-sm focus:outline-none focus:border-indigo-500">
+                            <option>Last 7 days</option>
+                            <option>Last 30 days</option>
+                            <option>Last 3 months</option>
+                        </select>
+                    </div>
+                    <!-- Chart Placeholder -->
+                    <div class="bg-dark-100 rounded-lg p-4 h-64">
+                        <div class="flex items-end justify-between h-48 space-x-2">
+                            <!-- Bar 1 -->
+                            <div class="flex flex-col items-center flex-1">
+                                <div class="w-full bg-indigo-500 rounded-t-lg mb-2" style="height: 60%"></div>
+                                <span class="text-xs text-gray-400">Mon</span>
+                            </div>
+                            <!-- Bar 2 -->
+                            <div class="flex flex-col items-center flex-1">
+                                <div class="w-full bg-indigo-500 rounded-t-lg mb-2" style="height: 80%"></div>
+                                <span class="text-xs text-gray-400">Tue</span>
+                            </div>
+                            <!-- Bar 3 -->
+                            <div class="flex flex-col items-center flex-1">
+                                <div class="w-full bg-indigo-500 rounded-t-lg mb-2" style="height: 45%"></div>
+                                <span class="text-xs text-gray-400">Wed</span>
+                            </div>
+                            <!-- Bar 4 -->
+                            <div class="flex flex-col items-center flex-1">
+                                <div class="w-full bg-indigo-500 rounded-t-lg mb-2" style="height: 90%"></div>
+                                <span class="text-xs text-gray-400">Thu</span>
+                            </div>
+                            <!-- Bar 5 -->
+                            <div class="flex flex-col items-center flex-1">
+                                <div class="w-full bg-indigo-500 rounded-t-lg mb-2" style="height: 70%"></div>
+                                <span class="text-xs text-gray-400">Fri</span>
+                            </div>
+                            <!-- Bar 6 -->
+                            <div class="flex flex-col items-center flex-1">
+                                <div class="w-full bg-indigo-500 rounded-t-lg mb-2" style="height: 85%"></div>
+                                <span class="text-xs text-gray-400">Sat</span>
+                            </div>
+                            <!-- Bar 7 -->
+                            <div class="flex flex-col items-center flex-1">
+                                <div class="w-full bg-indigo-500 rounded-t-lg mb-2" style="height: 55%"></div>
+                                <span class="text-xs text-gray-400">Sun</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Subject Performance -->
+                <div class="bg-dark-200 rounded-xl p-6 shadow-lg">
+                    <h2 class="text-xl font-semibold mb-6 text-white">Subject Performance</h2>
+                    <div class="space-y-4">
+                        <!-- Math -->
+                        <div>
+                            <div class="flex justify-between items-center mb-2">
+                                <span class="text-white font-medium">Mathematics</span>
+                                <span class="text-gray-400 text-sm">85%</span>
+                            </div>
+                            <div class="w-full bg-dark-100 rounded-full h-3">
+                                <div class="bg-green-500 h-3 rounded-full" style="width: 85%"></div>
+                            </div>
+                        </div>
+                        <!-- Science -->
+                        <div>
+                            <div class="flex justify-between items-center mb-2">
+                                <span class="text-white font-medium">Science</span>
+                                <span class="text-gray-400 text-sm">72%</span>
+                            </div>
+                            <div class="w-full bg-dark-100 rounded-full h-3">
+                                <div class="bg-blue-500 h-3 rounded-full" style="width: 72%"></div>
+                            </div>
+                        </div>
+                        <!-- History -->
+                        <div>
+                            <div class="flex justify-between items-center mb-2">
+                                <span class="text-white font-medium">History</span>
+                                <span class="text-gray-400 text-sm">68%</span>
+                            </div>
+                            <div class="w-full bg-dark-100 rounded-full h-3">
+                                <div class="bg-yellow-500 h-3 rounded-full" style="width: 68%"></div>
+                            </div>
+                        </div>
+                        <!-- Literature -->
+                        <div>
+                            <div class="flex justify-between items-center mb-2">
+                                <span class="text-white font-medium">Literature</span>
+                                <span class="text-gray-400 text-sm">91%</span>
+                            </div>
+                            <div class="w-full bg-dark-100 rounded-full h-3">
+                                <div class="bg-purple-500 h-3 rounded-full" style="width: 91%"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Recent Achievements -->
+                <div class="bg-dark-200 rounded-xl p-6 shadow-lg">
+                    <h2 class="text-xl font-semibold mb-6 text-white">Recent Achievements</h2>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <!-- Achievement 1 -->
+                        <div class="bg-dark-100 rounded-lg p-4 flex items-center space-x-4">
+                            <div class="w-12 h-12 bg-yellow-500/20 rounded-lg flex items-center justify-center">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-yellow-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+                                </svg>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold text-white">Study Marathon</h4>
+                                <p class="text-sm text-gray-400">Studied for 5+ hours in one day</p>
+                            </div>
+                        </div>
+                        <!-- Achievement 2 -->
+                        <div class="bg-dark-100 rounded-lg p-4 flex items-center space-x-4">
+                            <div class="w-12 h-12 bg-green-500/20 rounded-lg flex items-center justify-center">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-green-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                                </svg>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold text-white">Task Master</h4>
+                                <p class="text-sm text-gray-400">Completed 10 tasks in a week</p>
+                            </div>
+                        </div>
+                        <!-- Achievement 3 -->
+                        <div class="bg-dark-100 rounded-lg p-4 flex items-center space-x-4">
+                            <div class="w-12 h-12 bg-blue-500/20 rounded-lg flex items-center justify-center">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-blue-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6" />
+                                </svg>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold text-white">Consistency King</h4>
+                                <p class="text-sm text-gray-400">7-day study streak</p>
+                            </div>
+                        </div>
+                        <!-- Achievement 4 -->
+                        <div class="bg-dark-100 rounded-lg p-4 flex items-center space-x-4">
+                            <div class="w-12 h-12 bg-purple-500/20 rounded-lg flex items-center justify-center">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-purple-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11.049 2.927c.3-.921 1.603-.921 1.902 0l1.519 4.674a1 1 0 00.95.69h4.915c.969 0 1.371 1.24.588 1.81l-3.976 2.888a1 1 0 00-.363 1.118l1.518 4.674c.3.922-.755 1.688-1.538 1.118l-3.976-2.888a1 1 0 00-1.176 0l-3.976 2.888c-.783.57-1.838-.197-1.538-1.118l1.518-4.674a1 1 0 00-.363-1.118l-3.976-2.888c-.784-.57-.38-1.81.588-1.81h4.914a1 1 0 00.951-.69l1.519-4.674z" />
+                                </svg>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold text-white">Math Whiz</h4>
+                                <p class="text-sm text-gray-400">Scored 95% in Math test</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Sidebar -->
+            <div class="space-y-6">
+                <!-- Study Goals Progress -->
+                <div class="bg-dark-200 rounded-xl p-6 shadow-lg">
+                    <h3 class="text-lg font-semibold mb-4 text-white">Study Goals</h3>
+                    <div class="space-y-4">
+                        <!-- Goal 1 -->
+                        <div>
+                            <div class="flex justify-between items-center mb-2">
+                                <span class="text-sm text-white">Weekly Study Hours</span>
+                                <span class="text-xs text-gray-400">15/20h</span>
+                            </div>
+                            <div class="w-full bg-dark-100 rounded-full h-2">
+                                <div class="bg-indigo-500 h-2 rounded-full" style="width: 75%"></div>
+                            </div>
+                        </div>
+                        <!-- Goal 2 -->
+                        <div>
+                            <div class="flex justify-between items-center mb-2">
+                                <span class="text-sm text-white">Task Completion</span>
+                                <span class="text-xs text-gray-400">28/35</span>
+                            </div>
+                            <div class="w-full bg-dark-100 rounded-full h-2">
+                                <div class="bg-green-500 h-2 rounded-full" style="width: 80%"></div>
+                            </div>
+                        </div>
+                        <!-- Goal 3 -->
+                        <div>
+                            <div class="flex justify-between items-center mb-2">
+                                <span class="text-sm text-white">Pomodoro Sessions</span>
+                                <span class="text-xs text-gray-400">18/25</span>
+                            </div>
+                            <div class="w-full bg-dark-100 rounded-full h-2">
+                                <div class="bg-yellow-500 h-2 rounded-full" style="width: 72%"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Study Habits -->
+                <div class="bg-dark-200 rounded-xl p-6 shadow-lg">
+                    <h3 class="text-lg font-semibold mb-4 text-white">Study Habits</h3>
+                    <div class="space-y-3">
+                        <div class="flex justify-between items-center">
+                            <span class="text-sm text-gray-400">Average Session</span>
+                            <span class="text-sm text-white">45 min</span>
+                        </div>
+                        <div class="flex justify-between items-center">
+                            <span class="text-sm text-gray-400">Peak Study Time</span>
+                            <span class="text-sm text-white">7-9 PM</span>
+                        </div>
+                        <div class="flex justify-between items-center">
+                            <span class="text-sm text-gray-400">Most Productive Day</span>
+                            <span class="text-sm text-white">Saturday</span>
+                        </div>
+                        <div class="flex justify-between items-center">
+                            <span class="text-sm text-gray-400">Tasks Completed</span>
+                            <span class="text-sm text-white">4.2/day</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Export Report -->
+                <div class="bg-dark-200 rounded-xl p-6 shadow-lg">
+                    <h3 class="text-lg font-semibold mb-4 text-white">Export Report</h3>
+                    <div class="space-y-3">
+                        <button class="w-full bg-dark-100 hover:bg-indigo-900 py-3 rounded-lg transition-colors flex items-center justify-center space-x-2">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                            </svg>
+                            <span>Download PDF</span>
+                        </button>
+                        <button class="w-full bg-dark-100 hover:bg-indigo-900 py-3 rounded-lg transition-colors flex items-center justify-center space-x-2">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 17v-2m3 2v-4m3 4v-6m2 10H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                            </svg>
+                            <span>Generate Report</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Navigation Menu -->
+        <nav class="mt-8 bg-dark-200 rounded-xl p-4 shadow-lg">
+            <h2 class="text-xl font-semibold mb-4 text-white">Navigation</h2>
+            <div class="grid grid-cols-2 md:grid-cols-5 gap-4">
+                <!-- Study Sessions -->
+                <a href="study-sessions.html" class="bg-dark-100 p-4 rounded-full text-center hover:bg-indigo-900 transition-colors">
+                    <div class="text-indigo-400 mb-2">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mx-auto" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
+                        </svg>
+                    </div>
+                    <span class="font-medium">Study Sessions</span>
+                </a>
+                
+                <!-- Task List -->
+                <a href="task-list.html" class="bg-dark-100 p-4 rounded-full text-center hover:bg-indigo-900 transition-colors">
+                    <div class="text-indigo-400 mb-2">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mx-auto" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
+                        </svg>
+                    </div>
+                    <span class="font-medium">Task List</span>
+                </a>
+                
+                <!-- Target / Goals -->
+                <a href="#" class="bg-dark-100 p-4 rounded-full text-center hover:bg-indigo-900 transition-colors">
+                    <div class="text-indigo-400 mb-2">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mx-auto" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6" />
+                        </svg>
+                    </div>
+                    <span class="font-medium">Target / Goals</span>
+                </a>
+                
+                <!-- Progress Report (Active) -->
+                <a href="#" class="bg-indigo-900 p-4 rounded-full text-center">
+                    <div class="text-indigo-300 mb-2">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mx-auto" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
+                        </svg>
+                    </div>
+                    <span class="font-medium">Progress Report</span>
+                </a>
+                
+                <!-- Accessibility -->
+                <a href="#" class="bg-dark-100 p-4 rounded-full text-center hover:bg-indigo-900 transition-colors">
+                    <div class="text-indigo-400 mb-2">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mx-auto" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
+                        </svg>
+                    </div>
+                    <span class="font-medium">Accessibility</span>
+                </a>
+            </div>
+        </nav>
+    </div>
+</body>
+</html>

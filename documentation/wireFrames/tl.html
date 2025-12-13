@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Task List</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        dark: {
+                            100: '#1e293b',
+                            200: '#0f172a',
+                            300: '#020617',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-dark-300 min-h-screen text-gray-200">
+    <div class="container mx-auto px-4 py-8">
+        <!-- Header -->
+        <header class="mb-8">
+            <div class="flex justify-between items-center">
+                <div>
+                    <h1 class="text-2xl font-bold text-white">Task List</h1>
+                    <p class="text-gray-400">Manage your study tasks and assignments</p>
+                </div>
+                <a href="index.html" class="bg-dark-200 hover:bg-dark-100 px-4 py-2 rounded-lg transition-colors">
+                    ← Back to Dashboard
+                </a>
+            </div>
+        </header>
+
+        <!-- Main Content -->
+        <div class="grid grid-cols-1 lg:grid-cols-4 gap-6">
+            <!-- Task List -->
+            <div class="lg:col-span-3 bg-dark-200 rounded-xl p-6 shadow-lg">
+                <div class="flex justify-between items-center mb-6">
+                    <h2 class="text-xl font-semibold text-white">My Tasks</h2>
+                    <button class="bg-indigo-600 hover:bg-indigo-700 px-4 py-2 rounded-lg font-semibold transition-colors">
+                        + Add New Task
+                    </button>
+                </div>
+
+                <!-- Task Filters -->
+                <div class="flex space-x-4 mb-6">
+                    <button class="bg-dark-100 hover:bg-indigo-900 px-4 py-2 rounded-full transition-colors text-sm font-medium">
+                        All Tasks
+                    </button>
+                    <button class="bg-dark-100 hover:bg-indigo-900 px-4 py-2 rounded-full transition-colors text-sm font-medium">
+                        Pending
+                    </button>
+                    <button class="bg-dark-100 hover:bg-indigo-900 px-4 py-2 rounded-full transition-colors text-sm font-medium">
+                        Completed
+                    </button>
+                    <button class="bg-dark-100 hover:bg-indigo-900 px-4 py-2 rounded-full transition-colors text-sm font-medium">
+                        High Priority
+                    </button>
+                </div>
+
+                <!-- Tasks Container -->
+                <div class="space-y-4">
+                    <!-- Task Item 1 -->
+                    <div class="bg-dark-100 rounded-xl p-4 border-l-4 border-red-500">
+                        <div class="flex items-center justify-between">
+                            <div class="flex items-center space-x-4">
+                                <div class="w-5 h-5 rounded-full border-2 border-gray-400 hover:border-indigo-400 cursor-pointer"></div>
+                                <div>
+                                    <h3 class="font-semibold text-white">Complete Math Assignment</h3>
+                                    <p class="text-sm text-gray-400">Chapter 5 - Calculus problems</p>
+                                </div>
+                            </div>
+                            <div class="flex items-center space-x-3">
+                                <span class="bg-red-500/20 text-red-400 px-3 py-1 rounded-full text-sm">High Priority</span>
+                                <span class="text-sm text-gray-400">Due: Tomorrow</span>
+                                <button class="text-gray-400 hover:text-white">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 12h.01M12 12h.01M19 12h.01M6 12a1 1 0 11-2 0 1 1 0 012 0zm7 0a1 1 0 11-2 0 1 1 0 012 0zm7 0a1 1 0 11-2 0 1 1 0 012 0z" />
+                                    </svg>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Task Item 2 -->
+                    <div class="bg-dark-100 rounded-xl p-4 border-l-4 border-yellow-500">
+                        <div class="flex items-center justify-between">
+                            <div class="flex items-center space-x-4">
+                                <div class="w-5 h-5 rounded-full border-2 border-gray-400 hover:border-indigo-400 cursor-pointer"></div>
+                                <div>
+                                    <h3 class="font-semibold text-white">Read History Chapter</h3>
+                                    <p class="text-sm text-gray-400">World War II - Causes and Effects</p>
+                                </div>
+                            </div>
+                            <div class="flex items-center space-x-3">
+                                <span class="bg-yellow-500/20 text-yellow-400 px-3 py-1 rounded-full text-sm">Medium Priority</span>
+                                <span class="text-sm text-gray-400">Due: Friday</span>
+                                <button class="text-gray-400 hover:text-white">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 12h.01M12 12h.01M19 12h.01M6 12a1 1 0 11-2 0 1 1 0 012 0zm7 0a1 1 0 11-2 0 1 1 0 012 0zm7 0a1 1 0 11-2 0 1 1 0 012 0z" />
+                                    </svg>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Task Item 3 -->
+                    <div class="bg-dark-100 rounded-xl p-4 border-l-4 border-blue-500">
+                        <div class="flex items-center justify-between">
+                            <div class="flex items-center space-x-4">
+                                <div class="w-5 h-5 rounded-full border-2 border-gray-400 hover:border-indigo-400 cursor-pointer"></div>
+                                <div>
+                                    <h3 class="font-semibold text-white">Prepare Chemistry Lab Report</h3>
+                                    <p class="text-sm text-gray-400">Experiment #3 - Chemical Reactions</p>
+                                </div>
+                            </div>
+                            <div class="flex items-center space-x-3">
+                                <span class="bg-blue-500/20 text-blue-400 px-3 py-1 rounded-full text-sm">Low Priority</span>
+                                <span class="text-sm text-gray-400">Due: Next Week</span>
+                                <button class="text-gray-400 hover:text-white">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 12h.01M12 12h.01M19 12h.01M6 12a1 1 0 11-2 0 1 1 0 012 0zm7 0a1 1 0 11-2 0 1 1 0 012 0zm7 0a1 1 0 11-2 0 1 1 0 012 0z" />
+                                    </svg>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Task Item 4 (Completed) -->
+                    <div class="bg-dark-100 rounded-xl p-4 border-l-4 border-green-500 opacity-60">
+                        <div class="flex items-center justify-between">
+                            <div class="flex items-center space-x-4">
+                                <div class="w-5 h-5 rounded-full border-2 border-green-500 bg-green-500 cursor-pointer"></div>
+                                <div>
+                                    <h3 class="font-semibold text-white line-through">Write English Essay</h3>
+                                    <p class="text-sm text-gray-400 line-through">Shakespeare's Influence on Modern Literature</p>
+                                </div>
+                            </div>
+                            <div class="flex items-center space-x-3">
+                                <span class="bg-green-500/20 text-green-400 px-3 py-1 rounded-full text-sm">Completed</span>
+                                <span class="text-sm text-gray-400">Due: Yesterday</span>
+                                <button class="text-gray-400 hover:text-white">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 12h.01M12 12h.01M19 12h.01M6 12a1 1 0 11-2 0 1 1 0 012 0zm7 0a1 1 0 11-2 0 1 1 0 012 0zm7 0a1 1 0 11-2 0 1 1 0 012 0z" />
+                                    </svg>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Empty Task Template -->
+                    <div class="bg-dark-100 rounded-xl p-8 text-center border-2 border-dashed border-gray-600">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-12 w-12 mx-auto text-gray-500 mb-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
+                        </svg>
+                        <p class="text-gray-400">No more tasks. Add a new task to get started!</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Sidebar -->
+            <div class="space-y-6">
+                <!-- Add New Task -->
+                <div class="bg-dark-200 rounded-xl p-6 shadow-lg">
+                    <h3 class="text-lg font-semibold mb-4 text-white">Add New Task</h3>
+                    <div class="space-y-4">
+                        <div>
+                            <label class="block text-sm font-medium text-gray-400 mb-2">Task Title</label>
+                            <input type="text" class="w-full bg-dark-100 border border-gray-600 rounded-lg px-4 py-2 focus:outline-none focus:border-indigo-500" placeholder="Enter task title">
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-gray-400 mb-2">Description</label>
+                            <textarea class="w-full bg-dark-100 border border-gray-600 rounded-lg px-4 py-2 focus:outline-none focus:border-indigo-500" rows="3" placeholder="Enter task description"></textarea>
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-gray-400 mb-2">Priority</label>
+                            <select class="w-full bg-dark-100 border border-gray-600 rounded-lg px-4 py-2 focus:outline-none focus:border-indigo-500">
+                                <option>Low Priority</option>
+                                <option>Medium Priority</option>
+                                <option>High Priority</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-gray-400 mb-2">Due Date</label>
+                            <input type="date" class="w-full bg-dark-100 border border-gray-600 rounded-lg px-4 py-2 focus:outline-none focus:border-indigo-500">
+                        </div>
+                        <button class="w-full bg-indigo-600 hover:bg-indigo-700 py-2 rounded-lg font-semibold transition-colors">
+                            Add Task
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Task Statistics -->
+                <div class="bg-dark-200 rounded-xl p-6 shadow-lg">
+                    <h3 class="text-lg font-semibold mb-4 text-white">Task Statistics</h3>
+                    <div class="space-y-4">
+                        <div class="flex justify-between items-center">
+                            <span class="text-gray-400">Total Tasks</span>
+                            <span class="text-white font-semibold">4</span>
+                        </div>
+                        <div class="flex justify-between items-center">
+                            <span class="text-gray-400">Completed</span>
+                            <span class="text-green-400 font-semibold">1</span>
+                        </div>
+                        <div class="flex justify-between items-center">
+                            <span class="text-gray-400">Pending</span>
+                            <span class="text-yellow-400 font-semibold">3</span>
+                        </div>
+                        <div class="flex justify-between items-center">
+                            <span class="text-gray-400">Overdue</span>
+                            <span class="text-red-400 font-semibold">0</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Navigation Menu -->
+        <nav class="mt-8 bg-dark-200 rounded-xl p-4 shadow-lg">
+            <h2 class="text-xl font-semibold mb-4 text-white">Navigation</h2>
+            <div class="grid grid-cols-2 md:grid-cols-5 gap-4">
+                <!-- Study Sessions -->
+                <a href="ss.html" class="bg-dark-100 p-4 rounded-full text-center hover:bg-indigo-900 transition-colors">
+                    <div class="text-indigo-400 mb-2">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mx-auto" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
+                        </svg>
+                    </div>
+                    <span class="font-medium">Study Sessions</span>
+                </a>
+                
+                <!-- Task List (Active) -->
+                <a href="#" class="bg-indigo-900 p-4 rounded-full text-center">
+                    <div class="text-indigo-300 mb-2">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mx-auto" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
+                        </svg>
+                    </div>
+                    <span class="font-medium">Task List</span>
+                </a>
+                
+                <!-- Target / Goals -->
+                <a href="#" class="bg-dark-100 p-4 rounded-full text-center hover:bg-indigo-900 transition-colors">
+                    <div class="text-indigo-400 mb-2">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mx-auto" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6" />
+                        </svg>
+                    </div>
+                    <span class="font-medium">Target / Goals</span>
+                </a>
+                
+                <!-- Progress Report -->
+                <a href="#" class="bg-dark-100 p-4 rounded-full text-center hover:bg-indigo-900 transition-colors">
+                    <div class="text-indigo-400 mb-2">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mx-auto" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
+                        </svg>
+                    </div>
+                    <span class="font-medium">Progress Report</span>
+                </a>
+                
+                <!-- Accessibility -->
+                <a href="#" class="bg-dark-100 p-4 rounded-full text-center hover:bg-indigo-900 transition-colors">
+                    <div class="text-indigo-400 mb-2">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mx-auto" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
+                        </svg>
+                    </div>
+                    <span class="font-medium">Accessibility</span>
+                </a>
+            </div>
+        </nav>
+    </div>
+</body>
+</html>

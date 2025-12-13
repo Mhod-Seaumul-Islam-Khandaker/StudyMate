@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Study Sessions - Pomodoro Timer</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        dark: {
+                            100: '#1e293b',
+                            200: '#0f172a',
+                            300: '#020617',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-dark-300 min-h-screen text-gray-200">
+    <div class="container mx-auto px-4 py-8">
+        <!-- Header -->
+        <header class="mb-8">
+            <div class="flex justify-between items-center">
+                <div>
+                    <h1 class="text-2xl font-bold text-white">Study Sessions</h1>
+                    <p class="text-gray-400">Pomodoro Timer for focused studying</p>
+                </div>
+                <a href="index.html" class="bg-dark-200 hover:bg-dark-100 px-4 py-2 rounded-lg transition-colors">
+                    ← Back to Dashboard
+                </a>
+            </div>
+        </header>
+
+        <!-- Main Content -->
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+            <!-- Pomodoro Timer -->
+            <div class="lg:col-span-2 bg-dark-200 rounded-xl p-6 shadow-lg">
+                <h2 class="text-xl font-semibold mb-6 text-white">Pomodoro Timer</h2>
+                
+                <!-- Timer Display -->
+                <div class="bg-dark-100 rounded-xl p-8 mb-6">
+                    <div class="text-center">
+                        <!-- Circular Progress -->
+                        <div class="relative w-64 h-64 mx-auto mb-6">
+                            <div class="absolute inset-0 flex items-center justify-center">
+                                <div class="w-56 h-56 rounded-full border-4 border-gray-700 flex items-center justify-center">
+                                    <div class="text-center">
+                                        <div id="timer-display" class="text-5xl font-bold text-white mb-2">25:00</div>
+                                        <div id="timer-status" class="text-lg text-gray-300">Ready to Focus</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Progress ring would go here -->
+                        </div>
+                        
+                        <!-- Timer Controls -->
+                        <div class="flex justify-center space-x-4 mb-6">
+                            <button id="start-btn" class="bg-green-600 hover:bg-green-700 px-6 py-3 rounded-lg font-semibold transition-colors">
+                                Start
+                            </button>
+                            <button id="pause-btn" class="bg-yellow-600 hover:bg-yellow-700 px-6 py-3 rounded-lg font-semibold transition-colors" disabled>
+                                Pause
+                            </button>
+                            <button id="reset-btn" class="bg-red-600 hover:bg-red-700 px-6 py-3 rounded-lg font-semibold transition-colors">
+                                Reset
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Timer Settings -->
+                <div class="bg-dark-100 rounded-xl p-6">
+                    <h3 class="text-lg font-semibold mb-4 text-white">Timer Settings</h3>
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                        <!-- Focus Time -->
+                        <div>
+                            <label class="block text-sm font-medium text-gray-400 mb-2">Focus Time (minutes)</label>
+                            <div class="flex items-center space-x-2">
+                                <button class="bg-dark-200 hover:bg-dark-300 w-8 h-8 rounded-lg flex items-center justify-center">
+                                    -
+                                </button>
+                                <span class="px-3 py-1 bg-dark-200 rounded-lg min-w-12 text-center">25</span>
+                                <button class="bg-dark-200 hover:bg-dark-300 w-8 h-8 rounded-lg flex items-center justify-center">
+                                    +
+                                </button>
+                            </div>
+                        </div>
+                        
+                        <!-- Break Time -->
+                        <div>
+                            <label class="block text-sm font-medium text-gray-400 mb-2">Break Time (minutes)</label>
+                            <div class="flex items-center space-x-2">
+                                <button class="bg-dark-200 hover:bg-dark-300 w-8 h-8 rounded-lg flex items-center justify-center">
+                                    -
+                                </button>
+                                <span class="px-3 py-1 bg-dark-200 rounded-lg min-w-12 text-center">5</span>
+                                <button class="bg-dark-200 hover:bg-dark-300 w-8 h-8 rounded-lg flex items-center justify-center">
+                                    +
+                                </button>
+                            </div>
+                        </div>
+                        
+                        <!-- Long Break -->
+                        <div>
+                            <label class="block text-sm font-medium text-gray-400 mb-2">Long Break (minutes)</label>
+                            <div class="flex items-center space-x-2">
+                                <button class="bg-dark-200 hover:bg-dark-300 w-8 h-8 rounded-lg flex items-center justify-center">
+                                    -
+                                </button>
+                                <span class="px-3 py-1 bg-dark-200 rounded-lg min-w-12 text-center">15</span>
+                                <button class="bg-dark-200 hover:bg-dark-300 w-8 h-8 rounded-lg flex items-center justify-center">
+                                    +
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Session Stats & Info -->
+            <div class="space-y-6">
+                <!-- Current Session Stats -->
+                <div class="bg-dark-200 rounded-xl p-6 shadow-lg">
+                    <h3 class="text-lg font-semibold mb-4 text-white">Session Stats</h3>
+                    <div class="space-y-4">
+                        <div class="flex justify-between items-center">
+                            <span class="text-gray-400">Completed Pomodoros</span>
+                            <span class="text-white font-semibold">0</span>
+                        </div>
+                        <div class="flex justify-between items-center">
+                            <span class="text-gray-400">Focus Time Today</span>
+                            <span class="text-white font-semibold">0h 0m</span>
+                        </div>
+                        <div class="flex justify-between items-center">
+                            <span class="text-gray-400">Current Streak</span>
+                            <span class="text-white font-semibold">0 days</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Study Tips -->
+                <div class="bg-dark-200 rounded-xl p-6 shadow-lg">
+                    <h3 class="text-lg font-semibold mb-4 text-white">Study Tips</h3>
+                    <div class="space-y-3">
+                        <div class="flex items-start space-x-3">
+                            <div class="w-2 h-2 bg-indigo-500 rounded-full mt-2 flex-shrink-0"></div>
+                            <p class="text-sm text-gray-400">Work in 25-minute focused intervals</p>
+                        </div>
+                        <div class="flex items-start space-x-3">
+                            <div class="w-2 h-2 bg-indigo-500 rounded-full mt-2 flex-shrink-0"></div>
+                            <p class="text-sm text-gray-400">Take 5-minute breaks between sessions</p>
+                        </div>
+                        <div class="flex items-start space-x-3">
+                            <div class="w-2 h-2 bg-indigo-500 rounded-full mt-2 flex-shrink-0"></div>
+                            <p class="text-sm text-gray-400">After 4 sessions, take a longer 15-minute break</p>
+                        </div>
+                        <div class="flex items-start space-x-3">
+                            <div class="w-2 h-2 bg-indigo-500 rounded-full mt-2 flex-shrink-0"></div>
+                            <p class="text-sm text-gray-400">Eliminate distractions during focus time</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Quick Actions -->
+                <div class="bg-dark-200 rounded-xl p-6 shadow-lg">
+                    <h3 class="text-lg font-semibold mb-4 text-white">Quick Actions</h3>
+                    <div class="space-y-3">
+                        <button class="w-full bg-dark-100 hover:bg-indigo-900 py-3 rounded-lg transition-colors text-left px-4">
+                            Start Focus Session
+                        </button>
+                        <button class="w-full bg-dark-100 hover:bg-indigo-900 py-3 rounded-lg transition-colors text-left px-4">
+                            Start Short Break
+                        </button>
+                        <button class="w-full bg-dark-100 hover:bg-indigo-900 py-3 rounded-lg transition-colors text-left px-4">
+                            Start Long Break
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Navigation Menu -->
+        <nav class="mt-8 bg-dark-200 rounded-xl p-4 shadow-lg">
+            <h2 class="text-xl font-semibold mb-4 text-white">Navigation</h2>
+            <div class="grid grid-cols-2 md:grid-cols-5 gap-4">
+                <!-- Study Sessions (Active) -->
+                <a href="#" class="bg-indigo-900 p-4 rounded-full text-center">
+                    <div class="text-indigo-300 mb-2">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mx-auto" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
+                        </svg>
+                    </div>
+                    <span class="font-medium">Study Sessions</span>
+                </a>
+                
+                <!-- Task List -->
+                <a href="tl.html" class="bg-dark-100 p-4 rounded-full text-center hover:bg-indigo-900 transition-colors">
+                    <div class="text-indigo-400 mb-2">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mx-auto" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
+                        </svg>
+                    </div>
+                    <span class="font-medium">Task List</span>
+                </a>
+                
+                <!-- Target / Goals -->
+                <a href="#" class="bg-dark-100 p-4 rounded-full text-center hover:bg-indigo-900 transition-colors">
+                    <div class="text-indigo-400 mb-2">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mx-auto" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6" />
+                        </svg>
+                    </div>
+                    <span class="font-medium">Target / Goals</span>
+                </a>
+                
+                <!-- Progress Report -->
+                <a href="#" class="bg-dark-100 p-4 rounded-full text-center hover:bg-indigo-900 transition-colors">
+                    <div class="text-indigo-400 mb-2">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mx-auto" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
+                        </svg>
+                    </div>
+                    <span class="font-medium">Progress Report</span>
+                </a>
+                
+                <!-- Accessibility -->
+                <a href="#" class="bg-dark-100 p-4 rounded-full text-center hover:bg-indigo-900 transition-colors">
+                    <div class="text-indigo-400 mb-2">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mx-auto" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
+                        </svg>
+                    </div>
+                    <span class="font-medium">Accessibility</span>
+                </a>
+            </div>
+        </nav>
+    </div>
+</body>
+</html>

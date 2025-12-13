@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Study Dashboard</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        dark: {
+                            100: '#1e293b',
+                            200: '#0f172a',
+                            300: '#020617',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-dark-300 min-h-screen text-gray-200">
+    <div class="container mx-auto px-4 py-8">
+        <!-- Header -->
+        <header class="mb-8">
+            <h1 class="text-2xl font-bold text-white text-center">Study Dashboard</h1>
+            <p class="text-gray-400 text-center">Track your learning progress</p>
+        </header>
+
+        <!-- Main Content Grid -->
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+            <!-- Progress Graph Section -->
+            <div class="lg:col-span-2 bg-dark-200 rounded-xl p-6 shadow-lg">
+                <h2 class="text-xl font-semibold mb-4 text-white">Progress Overview</h2>
+                <div class="bg-dark-100 rounded-lg p-4 h-64 flex items-center justify-center">
+                    <!-- Placeholder for graph/chart -->
+                    <div class="text-center">
+                        <div class="w-32 h-32 mx-auto mb-4 border-4 border-indigo-500 rounded-full flex items-center justify-center">
+                            <span class="text-2xl font-bold">75%</span>
+                        </div>
+                        <p class="text-gray-400">Overall Progress</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Pending Tasks Section -->
+            <div class="bg-dark-200 rounded-xl p-6 shadow-lg">
+                <h2 class="text-xl font-bold text-white mb-2">Pending Tasks</h2>
+                <div class="space-y-4">
+                    <!-- Task 1 -->
+                    <div class="bg-dark-100 p-4 rounded-lg">
+                        <div class="flex items-center">
+                            <div class="w-3 h-3 rounded-full bg-yellow-500 mr-3"></div>
+                            <span class="font-medium">Complete Math Assignment</span>
+                        </div>
+                        <p class="text-sm text-gray-400 mt-2 ml-6">Due: Tomorrow</p>
+                    </div>
+                    
+                    <!-- Task 2 -->
+                    <div class="bg-dark-100 p-4 rounded-lg">
+                        <div class="flex items-center">
+                            <div class="w-3 h-3 rounded-full bg-blue-500 mr-3"></div>
+                            <span class="font-medium">Read Chapter 5</span>
+                        </div>
+                        <p class="text-sm text-gray-400 mt-2 ml-6">Due: Friday</p>
+                    </div>
+                    
+                    <!-- Task 3 -->
+                    <div class="bg-dark-100 p-4 rounded-lg">
+                        <div class="flex items-center">
+                            <div class="w-3 h-3 rounded-full bg-red-500 mr-3"></div>
+                            <span class="font-medium">Prepare for History Quiz</span>
+                        </div>
+                        <p class="text-sm text-gray-400 mt-2 ml-6">Due: Next Monday</p>
+                    </div>
+                    
+                    <!-- Empty task placeholder -->
+                    <div class="bg-dark-100 p-4 rounded-lg opacity-50">
+                        <div class="flex items-center">
+                            <div class="w-3 h-3 rounded-full bg-gray-500 mr-3"></div>
+                            <span class="font-medium">No more pending tasks</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Notifications Section -->
+            <div class="lg:col-span-3 bg-dark-200 rounded-xl p-6 shadow-lg">
+                <h2 class="text-xl font-semibold mb-4 text-white">Notifications</h2>
+                <div class="bg-dark-100 rounded-lg p-8 text-center">
+                    <div class="text-gray-400 mb-2">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-12 w-12 mx-auto" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9" />
+                        </svg>
+                    </div>
+                    <p class="text-gray-400">No new notifications</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Navigation Menu -->
+        <nav class="mt-8 bg-dark-200 rounded-xl p-4 shadow-lg">
+            <h2 class="text-xl font-bold mb-4 text-white">Navigation</h2>
+            <div class="grid grid-cols-2 md:grid-cols-5 gap-4">
+                <!-- Study Sessions -->
+                <a href="ss.html" class="bg-dark-100 p-4 rounded-full text-center hover:bg-indigo-900 transition-colors">
+                    <div class="text-indigo-400 mb-2">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mx-auto" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
+                        </svg>
+                    </div>
+                    <span class="font-medium">Study Sessions</span>
+                </a>
+                
+                <!-- Task List -->
+                <a href="tl.html" class="bg-dark-100 p-4 rounded-full text-center hover:bg-indigo-900 transition-colors">
+                    <div class="text-indigo-400 mb-2">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mx-auto" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
+                        </svg>
+                    </div>
+                    <span class="font-medium">Task List</span>
+                </a>
+                
+                <!-- Target / Goals -->
+                <a href="#" class="bg-dark-100 p-4 rounded-full text-center hover:bg-indigo-900 transition-colors">
+                    <div class="text-indigo-400 mb-2">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mx-auto" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6" />
+                        </svg>
+                    </div>
+                    <span class="font-medium">Target / Goals</span>
+                </a>
+                
+                <!-- Progress Report -->
+                <a href="#" class="bg-dark-100 p-4 rounded-full text-center hover:bg-indigo-900 transition-colors">
+                    <div class="text-indigo-400 mb-2">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mx-auto" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
+                        </svg>
+                    </div>
+                    <span class="font-medium">Progress Report</span>
+                </a>
+                
+                <!-- Accessibility -->
+                <a href="#" class="bg-dark-100 p-4 rounded-full text-center hover:bg-indigo-900 transition-colors">
+                    <div class="text-indigo-400 mb-2">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mx-auto" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
+                        </svg>
+                    </div>
+                    <span class="font-medium">Accessibility</span>
+                </a>
+            </div>
+        </nav>
+    </div>
+</body>
+</html>
