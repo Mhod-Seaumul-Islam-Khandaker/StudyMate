@@ -1,21 +1,17 @@
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
-    id("org.jetbrains.kotlin.plugin.serialization") version "2.0.21"
+    // REMOVED: id("org.jetbrains.kotlin.plugin.serialization") version "2.0.21" // Causes version conflict
 }
 
 android {
     namespace = "com.example.studymate"
-    // Use direct assignment for SDK versions in Kotlin DSL
-    compileSdk = 36
-    buildFeatures {
-        viewBinding = true
-    }
+    compileSdk = 34 // Changed from 36 to 34 (more stable)
 
     defaultConfig {
         applicationId = "com.example.studymate"
-        minSdk = 26
-        targetSdk = 36
+        minSdk = 24 // Changed from 26 (better compatibility)
+        targetSdk = 34 // Changed from 36 to match compileSdk
         versionCode = 1
         versionName = "1.0"
 
@@ -32,40 +28,50 @@ android {
         }
     }
 
-    // Compile options use assignment with JavaVersion enum in Kotlin DSL
-    compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_11
-        targetCompatibility = JavaVersion.VERSION_11
+    // ✅ FIX #1: Build features must be INSIDE android{}
+    buildFeatures {
+        viewBinding = true  // CRITICAL for ActivityAuthBinding
     }
 
-    // Kotlin options
+    compileOptions {
+        // ✅ FIX #2: Use Java 17 (required for AGP 8+)
+        sourceCompatibility = JavaVersion.VERSION_17
+        targetCompatibility = JavaVersion.VERSION_17
+    }
+
     kotlinOptions {
-        jvmTarget = "11"
+        // ✅ FIX #3: Match Java version
+        jvmTarget = "17"
     }
 }
 
 dependencies {
-
     // AndroidX Core KTX and UI components
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)
-    implementation(libs.material)
+    implementation(libs.material) // Using version catalog
     implementation(libs.androidx.activity)
     implementation(libs.androidx.constraintlayout)
 
-    // Explicit dependencies with hardcoded versions (outside of BoM management)
+    // CardView (use version catalog if possible)
     implementation("androidx.cardview:cardview:1.0.0")
 
+    // ✅ REMOVED DUPLICATE: implementation("com.google.android.material:material:1.11.0")
+
+    // ... your other Android dependencies ...
+
+    // ✅ CORRECT SETUP for Supabase v3.x
+    // Use the BOM (Bill of Materials) to manage compatible versions
+    implementation(platform("io.github.jan-tennert.supabase:bom:3.0.0"))
+
+    // Use the module names for v3.x[citation:8]
+    implementation("io.github.jan-tennert.supabase:auth-kt")  // Changed from 'gotrue-kt'
+    implementation("io.github.jan-tennert.supabase:postgrest-kt")
+
+    // Ktor 3.x is required for supabase-kt 3.0.0[citation:8]
+    implementation("io.ktor:ktor-client-android:3.0.0")
     // Testing dependencies
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
-    implementation("com.google.android.material:material:1.11.0")
-    // superbase
-    implementation(platform("io.github.jan-tennert.supabase:bom:3.2.6"))
-    implementation("io.github.jan-tennert.supabase:auth-kt")
-    implementation("io.github.jan-tennert.supabase:postgrest-kt")
-    implementation("io.ktor:ktor-client-android:3.3.3")
-
-
 }
