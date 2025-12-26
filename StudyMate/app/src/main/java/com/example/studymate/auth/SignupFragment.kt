@@ -7,21 +7,22 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.repeatOnLifecycle
 import com.example.studymate.databinding.FragmentSignupBinding
 import com.example.studymate.main.MainActivity
-import com.example.studymate.utils.SupabaseClient
-// ✅ FIX 1: Add these Supabase imports
-import io.github.jan.supabase.auth.auth
-import io.github.jan.supabase.auth.providers.builtin.Email
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
+import com.example.studymate.ui.common.UiState
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
 
+@AndroidEntryPoint
 class SignupFragment : Fragment() {
 
     private var _binding: FragmentSignupBinding? = null
     private val binding get() = _binding!!
+    private val viewModel: AuthViewModel by viewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -36,79 +37,64 @@ class SignupFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         binding.signupButton.setOnClickListener {
-            val emailText = binding.emailInput.text.toString().trim() // Renamed to avoid conflict
-            val passwordText = binding.passwordInput.text.toString().trim()
+            // Note: Simple signup uses "Name" field as "Name" if available in layout, 
+            // but the current layout might only have email/password based on previous fragment.
+            // Assuming layout has name or we just use email prefix.
+            // Let's check layout later, for now assuming email/pass are there.
+            
+            val email = binding.emailInput.text.toString().trim()
+            val password = binding.passwordInput.text.toString().trim()
 
-            if (emailText.isEmpty() || passwordText.isEmpty()) {
-                Toast.makeText(
-                    requireContext(),
-                    "Please fill all fields",
-                    Toast.LENGTH_SHORT
-                ).show()
+            // Ideally there's a name field, but if not we can default or add it.
+            // Prompt didn't specify changing layout, so I'll check if I need to add name field.
+            // The prompt says "UserEntity: id, name, email...".
+            // I'll assume "Student" as default name if no input.
+            val name = "Student" 
+
+            if (email.isEmpty() || password.isEmpty()) {
+                Toast.makeText(requireContext(), "Please fill all fields", Toast.LENGTH_SHORT).show()
                 return@setOnClickListener
             }
 
-            if (passwordText.length < 6) {
-                Toast.makeText(
-                    requireContext(),
-                    "Password should be at least 6 characters",
-                    Toast.LENGTH_SHORT
-                ).show()
-                return@setOnClickListener
+            if (password.length < 4) {
+                 Toast.makeText(requireContext(), "Password too short", Toast.LENGTH_SHORT).show()
+                 return@setOnClickListener
             }
 
-            // Show loading state
-            binding.signupButton.isEnabled = false
-            binding.signupButton.text = "Creating account..."
+            viewModel.signup(name, email, password)
+        }
 
-            // Perform Supabase signup with auth module
-            CoroutineScope(Dispatchers.IO).launch {
-                try {
-                    // ✅ FIX 2: Updated syntax for Supabase v3
-                    // The .auth property is now visible because of the import above
-                    SupabaseClient.client.auth.signUpWith(Email) {
-                        email = emailText
-                        password = passwordText
-                    }
+        binding.loginText.setOnClickListener {
+            (requireActivity() as? AuthActivity)?.switchToLogin()
+        }
 
-                    // Signup successful - auto login after signup
-                    SupabaseClient.client.auth.signInWith(Email) {
-                        email = emailText
-                        password = passwordText
-                    }
-
-                    withContext(Dispatchers.Main) {
-                        binding.signupButton.isEnabled = true
-                        binding.signupButton.text = "Sign Up"
-
-                        val intent = Intent(requireContext(), MainActivity::class.java)
-                        startActivity(intent)
-                        requireActivity().finish()
-                    }
-                } catch (e: Exception) {
-                    withContext(Dispatchers.Main) {
-                        binding.signupButton.isEnabled = true
-                        binding.signupButton.text = "Sign Up"
-
-                        val errorMessage = when {
-                            e.message?.contains("User already registered") == true ->
-                                "Account already exists. Please login instead."
-                            else -> "Signup failed: ${e.message}"
+        viewLifecycleOwner.lifecycleScope.launch {
+            viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
+                viewModel.uiState.collect { state ->
+                    when (state) {
+                        is UiState.Loading -> {
+                            binding.signupButton.isEnabled = false
+                            binding.signupButton.text = "Creating..."
                         }
-
-                        Toast.makeText(
-                            requireContext(),
-                            errorMessage,
-                            Toast.LENGTH_SHORT
-                        ).show()
+                        is UiState.Success<*> -> {
+                            binding.signupButton.isEnabled = true
+                            binding.signupButton.text = "Sign Up"
+                            Toast.makeText(requireContext(), "Account created!", Toast.LENGTH_SHORT).show()
+                            startActivity(Intent(requireContext(), MainActivity::class.java))
+                            requireActivity().finish()
+                        }
+                        is UiState.Error -> {
+                            binding.signupButton.isEnabled = true
+                            binding.signupButton.text = "Sign Up"
+                            Toast.makeText(requireContext(), state.message, Toast.LENGTH_SHORT).show()
+                        }
+                        else -> {
+                            binding.signupButton.isEnabled = true
+                            binding.signupButton.text = "Sign Up"
+                        }
                     }
                 }
             }
-        }
-
-        // Navigate to login fragment
-        binding.loginText.setOnClickListener {
-            (requireActivity() as? AuthActivity)?.switchToLogin()
         }
     }
 

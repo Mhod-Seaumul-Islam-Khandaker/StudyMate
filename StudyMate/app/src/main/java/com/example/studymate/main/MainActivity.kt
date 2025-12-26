@@ -1,21 +1,37 @@
 package com.example.studymate.main
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.setupWithNavController
 import com.example.studymate.R
+import com.example.studymate.auth.AuthActivity
+import com.example.studymate.data.repository.UserRepository
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import dagger.hilt.android.AndroidEntryPoint
+import javax.inject.Inject
 
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
+
+    @Inject
+    lateinit var userRepository: UserRepository
 
     private val TAG = "MainActivity"
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        
+        // Check authentication
+        if (userRepository.getLoggedInUserId() == -1L) {
+            Log.d(TAG, "onCreate: No user logged in, redirecting to AuthActivity")
+            startActivity(Intent(this, AuthActivity::class.java))
+            finish()
+            return
+        }
+
         Log.d(TAG, "onCreate: Activity started")
         setContentView(R.layout.activity_main)
 

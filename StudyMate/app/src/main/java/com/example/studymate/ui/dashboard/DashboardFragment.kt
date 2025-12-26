@@ -1,5 +1,7 @@
 package com.example.studymate.ui.dashboard
 
+import android.app.AlertDialog
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -10,10 +12,13 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
+import com.example.studymate.auth.AuthActivity
+import com.example.studymate.data.repository.UserRepository
 import com.example.studymate.databinding.FragmentDashboardBinding
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
 @AndroidEntryPoint
 class DashboardFragment : Fragment() {
@@ -22,6 +27,9 @@ class DashboardFragment : Fragment() {
     private val binding get() = _binding!!
     private val viewModel: DashboardViewModel by viewModels()
     private val TAG = "DashboardFragment"
+
+    @Inject
+    lateinit var userRepository: UserRepository
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -37,6 +45,26 @@ class DashboardFragment : Fragment() {
         Log.d(TAG, "onViewCreated: Setting up UI")
         
         setupObservers()
+        setupListeners()
+    }
+    
+    private fun setupListeners() {
+        binding.logoutButton.setOnClickListener {
+            showLogoutDialog()
+        }
+    }
+
+    private fun showLogoutDialog() {
+        AlertDialog.Builder(requireContext())
+            .setTitle("Logout")
+            .setMessage("Are you sure you want to logout?")
+            .setPositiveButton("Logout") { _, _ ->
+                userRepository.logout()
+                startActivity(Intent(requireContext(), AuthActivity::class.java))
+                requireActivity().finish()
+            }
+            .setNegativeButton("Cancel", null)
+            .show()
     }
 
     private fun setupObservers() {
@@ -68,7 +96,6 @@ class DashboardFragment : Fragment() {
                 launch {
                     viewModel.progress.collectLatest { percent ->
                         binding.progressPercent.text = "$percent%"
-                        // In a real implementation, we would update a CircularProgressBar view here
                     }
                 }
             }
