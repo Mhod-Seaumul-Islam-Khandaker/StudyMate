@@ -12,6 +12,7 @@ import com.example.studymate.data.repository.UserRepository
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
+import kotlin.math.log
 
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
@@ -23,7 +24,7 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        
+        Log.d(TAG, "onCreate: starting ")
         // Check authentication
         if (userRepository.getLoggedInUserId() == -1L) {
             Log.d(TAG, "onCreate: No user logged in, redirecting to AuthActivity")
