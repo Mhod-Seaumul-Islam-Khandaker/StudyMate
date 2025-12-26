@@ -5,7 +5,8 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:padding="24dp"
-    android:gravity="center">
+    android:gravity="center"
+    android:background="#121212">
 
     <TextView
         android:layout_width="wrap_content"
@@ -13,7 +14,7 @@
         android:text="Create Account"
         android:textSize="28sp"
         android:textStyle="bold"
-        android:textColor="@android:color/black"
+        android:textColor="@android:color/white"
         android:layout_marginBottom="32dp"
         android:layout_marginTop="32dp" />
 
@@ -24,6 +25,10 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="16dp"
+        android:textColorHint="@android:color/white"
+        app:boxStrokeColor="@android:color/white"
+        app:boxStrokeWidth="2dp"
+        app:hintTextColor="@android:color/white"
         app:errorEnabled="true">
 
         <com.google.android.material.textfield.TextInputEditText
@@ -31,6 +36,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Email"
+            android:textColor="@android:color/white"
             android:inputType="textEmailAddress"
             android:maxLines="1"
             android:singleLine="true" />
@@ -44,7 +50,12 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="24dp"
+        android:textColorHint="@android:color/white"
+        app:boxStrokeColor="@android:color/white"
+        app:boxStrokeWidth="2dp"
+        app:hintTextColor="@android:color/white"
         app:endIconMode="password_toggle"
+        app:endIconTint="@android:color/white"
         app:errorEnabled="true">
 
         <com.google.android.material.textfield.TextInputEditText
@@ -52,6 +63,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Password"
+            android:textColor="@android:color/white"
             android:inputType="textPassword"
             android:maxLines="1"
             android:singleLine="true" />
@@ -68,9 +80,10 @@
         android:textStyle="bold"
         app:cornerRadius="12dp"
         android:layout_marginBottom="24dp"
-        app:backgroundTint="@color/design_default_color_primary" />
+        app:backgroundTint="#BB86FC"
+        android:textColor="@android:color/black" />
 
-    <!-- Already have account text - UPDATED with clickable "Login" -->
+    <!-- Already have account text -->
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -90,7 +103,7 @@
             android:layout_height="wrap_content"
             android:text="Login"
             android:textSize="16sp"
-            android:textColor="#6200EE"
+            android:textColor="#BB86FC"
             android:clickable="true"
             android:focusable="true"
             android:textStyle="bold" />
