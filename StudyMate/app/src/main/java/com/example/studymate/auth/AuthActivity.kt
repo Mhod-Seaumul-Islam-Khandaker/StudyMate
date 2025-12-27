@@ -59,11 +59,4 @@ class AuthActivity : AppCompatActivity() {
         loadFragment(LoginFragment(), "Login Screen")
         supportActionBar?.title = "Welcome Back"
     }
-
-    override fun onDestroy() {
-        super.onDestroy()
-        if (isFinishing) {
-            ttsHelper.shutdown()
-        }
-    }
 }

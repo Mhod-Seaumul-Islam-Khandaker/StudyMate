@@ -1,6 +1,5 @@
 package com.example.studymate.main
 
-import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
@@ -64,13 +63,6 @@ class MainActivity : AppCompatActivity() {
             
             // Update state for next navigation
             previousDestinationLabel = currentLabel
-        }
-    }
-
-    override fun onDestroy() {
-        super.onDestroy()
-        if (isFinishing) {
-             ttsHelper.shutdown()
         }
     }
 }
