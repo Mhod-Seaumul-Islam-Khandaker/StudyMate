@@ -5,12 +5,12 @@ import android.app.NotificationChannel
 import android.app.NotificationManager
 import android.app.Service
 import android.content.Intent
+import android.media.RingtoneManager
 import android.os.Build
 import android.os.CountDownTimer
 import android.os.IBinder
 import android.util.Log
 import androidx.core.app.NotificationCompat
-import com.example.studymate.R
 import com.example.studymate.data.repository.UserRepository
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.CoroutineScope
@@ -19,7 +19,6 @@ import kotlinx.coroutines.SupervisorJob
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
-import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @AndroidEntryPoint
@@ -91,11 +90,22 @@ class TimerService : Service() {
                 Log.d(TAG, "onFinish: Timer completed")
                 _timeLeft.value = 0
                 _isRunning.value = false
+                playAlarmSound() // Play sound on finish
                 stopForeground(STOP_FOREGROUND_REMOVE)
                 stopSelf()
                 // TODO: Save completed session to DB via Repository
             }
         }.start()
+    }
+
+    private fun playAlarmSound() {
+        try {
+            val notification = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION)
+            val r = RingtoneManager.getRingtone(applicationContext, notification)
+            r.play()
+        } catch (e: Exception) {
+            e.printStackTrace()
+        }
     }
 
     private fun pauseTimer() {
