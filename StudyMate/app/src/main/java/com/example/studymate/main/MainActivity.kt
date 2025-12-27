@@ -1,8 +1,11 @@
 package com.example.studymate.main
 
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
+import android.view.accessibility.AccessibilityEvent
+import android.view.accessibility.AccessibilityManager
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.setupWithNavController
@@ -12,7 +15,6 @@ import com.example.studymate.data.repository.UserRepository
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
-import kotlin.math.log
 
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
@@ -21,10 +23,13 @@ class MainActivity : AppCompatActivity() {
     lateinit var userRepository: UserRepository
 
     private val TAG = "MainActivity"
+    
+    // Track previous destination for "from X" context
+    private var previousDestinationLabel: CharSequence? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        Log.d(TAG, "onCreate: starting ")
+        
         // Check authentication
         if (userRepository.getLoggedInUserId() == -1L) {
             Log.d(TAG, "onCreate: No user logged in, redirecting to AuthActivity")
@@ -43,8 +48,40 @@ class MainActivity : AppCompatActivity() {
         
         bottomNavigationView.setupWithNavController(navController)
         
+        // Accessibility Navigation Listener
         navController.addOnDestinationChangedListener { _, destination, _ ->
-            Log.d(TAG, "Navigated to ${destination.label}")
+            val currentLabel = destination.label
+            Log.d(TAG, "Navigated to $currentLabel")
+            
+            // Only announce if we have a previous destination (skips initial load)
+            // and if the label is actually different
+            if (previousDestinationLabel != null && currentLabel != null && previousDestinationLabel != currentLabel) {
+                val announcement = "Navigating to $currentLabel from $previousDestinationLabel"
+                announceForAccessibility(announcement)
+            }
+            
+            // Update state for next navigation
+            previousDestinationLabel = currentLabel
+        }
+    }
+
+    /**
+     * Sends an accessibility announcement using the native Android framework.
+     * This will be spoken by TalkBack if enabled.
+     */
+    private fun announceForAccessibility(message: String) {
+        val accessibilityManager = getSystemService(Context.ACCESSIBILITY_SERVICE) as AccessibilityManager
+        
+        if (accessibilityManager.isEnabled) {
+            val event = AccessibilityEvent.obtain(AccessibilityEvent.TYPE_ANNOUNCEMENT)
+            event.text.add(message)
+            event.className = MainActivity::class.java.name
+            event.packageName = packageName
+            
+            accessibilityManager.sendAccessibilityEvent(event)
+            Log.d(TAG, "Accessibility Announcement Sent: \"$message\"")
+        } else {
+            Log.d(TAG, "Accessibility disabled, skipping announcement: \"$message\"")
         }
     }
 }
