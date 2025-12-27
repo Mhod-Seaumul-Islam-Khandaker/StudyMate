@@ -17,6 +17,7 @@ import androidx.lifecycle.repeatOnLifecycle
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.studymate.R
 import com.example.studymate.data.model.Priority
+import com.example.studymate.data.model.TaskEntity
 import com.example.studymate.databinding.FragmentTasksBinding
 import com.example.studymate.ui.common.UiState
 import com.google.android.material.textfield.TextInputEditText
@@ -24,6 +25,7 @@ import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 import java.util.Calendar
+import java.util.Date
 
 @AndroidEntryPoint
 class TasksFragment : Fragment() {
@@ -57,7 +59,7 @@ class TasksFragment : Fragment() {
                 viewModel.updateTaskStatus(task, isCompleted = isChecked)
             },
             onTaskClicked = { task ->
-                // TODO: Edit task dialog
+                showEditTaskDialog(task)
             }
         )
         binding.recyclerView.layoutManager = LinearLayoutManager(requireContext())
@@ -111,6 +113,56 @@ class TasksFragment : Fragment() {
                 calendar.set(datePicker.year, datePicker.month, datePicker.dayOfMonth)
                 
                 viewModel.addTask(title, priority, calendar.timeInMillis)
+            }
+            .setNegativeButton("Cancel", null)
+            .show()
+    }
+
+    private fun showEditTaskDialog(task: TaskEntity) {
+        val dialogView = LayoutInflater.from(requireContext()).inflate(R.layout.dialog_add_task, null)
+        
+        // Pre-fill fields
+        val titleInput = dialogView.findViewById<TextInputEditText>(R.id.editTitle)
+        val radioGroup = dialogView.findViewById<RadioGroup>(R.id.radioGroupPriority)
+        val datePicker = dialogView.findViewById<DatePicker>(R.id.datePicker)
+
+        titleInput.setText(task.title)
+        
+        when (task.priority) {
+            Priority.HIGH -> radioGroup.check(R.id.radioHigh)
+            Priority.MEDIUM -> radioGroup.check(R.id.radioMedium)
+            Priority.LOW -> radioGroup.check(R.id.radioLow)
+        }
+        
+        val calendar = Calendar.getInstance()
+        calendar.timeInMillis = task.dueDate
+        datePicker.updateDate(calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH), calendar.get(Calendar.DAY_OF_MONTH))
+
+        AlertDialog.Builder(requireContext())
+            .setView(dialogView)
+            .setPositiveButton("Update") { _, _ ->
+                val title = titleInput.text.toString()
+                if (title.isBlank()) return@setPositiveButton
+
+                val priority = when (radioGroup.checkedRadioButtonId) {
+                    R.id.radioHigh -> Priority.HIGH
+                    R.id.radioMedium -> Priority.MEDIUM
+                    else -> Priority.LOW
+                }
+
+                val newCalendar = Calendar.getInstance()
+                newCalendar.set(datePicker.year, datePicker.month, datePicker.dayOfMonth)
+                
+                val updatedTask = task.copy(
+                    title = title,
+                    priority = priority,
+                    dueDate = newCalendar.timeInMillis
+                )
+                
+                viewModel.updateTask(updatedTask)
+            }
+            .setNeutralButton("Delete") { _, _ ->
+                viewModel.deleteTask(task)
             }
             .setNegativeButton("Cancel", null)
             .show()

@@ -74,6 +74,20 @@ class TasksViewModel @Inject constructor(
         }
     }
 
+    fun updateTask(task: TaskEntity) {
+        viewModelScope.launch {
+            Log.d(TAG, "updateTask: ${task.id} - ${task.title}")
+            taskRepository.updateTask(task)
+        }
+    }
+
+    fun deleteTask(task: TaskEntity) {
+        viewModelScope.launch {
+            Log.d(TAG, "deleteTask: ${task.id}")
+            taskRepository.deleteTask(task)
+        }
+    }
+
     fun addTask(title: String, priority: Priority, dueDate: Long) {
         val userId = currentUserId
         if (userId == null) {
