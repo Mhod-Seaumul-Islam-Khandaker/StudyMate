@@ -6,6 +6,7 @@ import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.studymate.service.TimerService
+import com.example.studymate.utils.TextToSpeechHelper
 import dagger.hilt.android.lifecycle.HiltViewModel
 import dagger.hilt.android.qualifiers.ApplicationContext
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -16,7 +17,8 @@ import javax.inject.Inject
 
 @HiltViewModel
 class TimerViewModel @Inject constructor(
-    @ApplicationContext private val context: Context
+    @ApplicationContext private val context: Context,
+    private val ttsHelper: TextToSpeechHelper
 ) : ViewModel() {
 
     private val TAG = "TimerViewModel"
@@ -50,6 +52,8 @@ class TimerViewModel @Inject constructor(
             _selectedDuration.value = duration
             _timeLeft.value = duration
             Log.d(TAG, "setDuration: $duration")
+            val minutes = duration / 1000 / 60
+            ttsHelper.speak("Timer set to $minutes minutes")
         }
     }
 
@@ -60,6 +64,7 @@ class TimerViewModel @Inject constructor(
             putExtra(TimerService.EXTRA_DURATION, _selectedDuration.value)
         }
         context.startService(intent)
+        ttsHelper.speak("Timer started")
     }
 
     fun pauseTimer() {
@@ -68,6 +73,7 @@ class TimerViewModel @Inject constructor(
             action = TimerService.ACTION_PAUSE
         }
         context.startService(intent)
+        ttsHelper.speak("Timer paused")
     }
 
     fun stopTimer() {
@@ -77,5 +83,6 @@ class TimerViewModel @Inject constructor(
         }
         context.startService(intent)
         _timeLeft.value = _selectedDuration.value
+        ttsHelper.speak("Timer stopped")
     }
 }

@@ -9,6 +9,7 @@ import com.example.studymate.data.model.TaskStatus
 import com.example.studymate.data.repository.TaskRepository
 import com.example.studymate.data.repository.UserRepository
 import com.example.studymate.ui.common.UiState
+import com.example.studymate.utils.TextToSpeechHelper
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -21,7 +22,8 @@ import javax.inject.Inject
 @HiltViewModel
 class TasksViewModel @Inject constructor(
     private val taskRepository: TaskRepository,
-    private val userRepository: UserRepository
+    private val userRepository: UserRepository,
+    private val ttsHelper: TextToSpeechHelper
 ) : ViewModel() {
 
     private val TAG = "TasksViewModel"
@@ -71,6 +73,12 @@ class TasksViewModel @Inject constructor(
             val updatedTask = task.copy(status = newStatus)
             Log.d(TAG, "updateTaskStatus: ${task.id} -> $newStatus")
             taskRepository.updateTask(updatedTask)
+            
+            if (isCompleted) {
+                ttsHelper.speak("Task completed: ${task.title}")
+            } else {
+                ttsHelper.speak("Task marked as pending: ${task.title}")
+            }
         }
     }
 
@@ -78,6 +86,7 @@ class TasksViewModel @Inject constructor(
         viewModelScope.launch {
             Log.d(TAG, "updateTask: ${task.id} - ${task.title}")
             taskRepository.updateTask(task)
+            ttsHelper.speak("Task updated successfully")
         }
     }
 
@@ -85,6 +94,7 @@ class TasksViewModel @Inject constructor(
         viewModelScope.launch {
             Log.d(TAG, "deleteTask: ${task.id}")
             taskRepository.deleteTask(task)
+            ttsHelper.speak("Task deleted")
         }
     }
 
@@ -106,6 +116,7 @@ class TasksViewModel @Inject constructor(
             )
             Log.d(TAG, "addTask: Adding ${newTask.title}")
             taskRepository.insertTask(newTask)
+            ttsHelper.speak("Task added successfully")
         }
     }
 }

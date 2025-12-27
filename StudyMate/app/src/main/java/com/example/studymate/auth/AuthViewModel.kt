@@ -6,6 +6,7 @@ import androidx.lifecycle.viewModelScope
 import com.example.studymate.data.model.UserEntity
 import com.example.studymate.data.repository.UserRepository
 import com.example.studymate.ui.common.UiState
+import com.example.studymate.utils.TextToSpeechHelper
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -15,7 +16,8 @@ import javax.inject.Inject
 
 @HiltViewModel
 class AuthViewModel @Inject constructor(
-    private val userRepository: UserRepository
+    private val userRepository: UserRepository,
+    private val ttsHelper: TextToSpeechHelper
 ) : ViewModel() {
 
     private val TAG = "AuthViewModel"
@@ -24,6 +26,7 @@ class AuthViewModel @Inject constructor(
     val uiState: StateFlow<UiState> = _uiState.asStateFlow()
 
     fun login(email: String, pass: String) {
+        ttsHelper.speak("Signing in")
         viewModelScope.launch {
             _uiState.value = UiState.Loading
             try {
@@ -33,22 +36,27 @@ class AuthViewModel @Inject constructor(
                         Log.d(TAG, "login: Success for ${user.email}")
                         userRepository.saveUserSession(user.id)
                         _uiState.value = UiState.Success("Login Successful")
+                        ttsHelper.speak("Login successful")
                     } else {
                         Log.w(TAG, "login: Incorrect password")
                         _uiState.value = UiState.Error("Invalid email or password")
+                        ttsHelper.speak("Invalid email or password")
                     }
                 } else {
                     Log.w(TAG, "login: User not found")
                     _uiState.value = UiState.Error("User not found")
+                    ttsHelper.speak("User not found")
                 }
             } catch (e: Exception) {
                 Log.e(TAG, "login: Error", e)
                 _uiState.value = UiState.Error(e.message ?: "Login failed")
+                ttsHelper.speak("Login failed")
             }
         }
     }
 
     fun signup(name: String, email: String, pass: String) {
+        ttsHelper.speak("Creating account")
         viewModelScope.launch {
             _uiState.value = UiState.Loading
             try {
@@ -56,6 +64,7 @@ class AuthViewModel @Inject constructor(
                 if (existingUser != null) {
                     Log.w(TAG, "signup: Email already exists")
                     _uiState.value = UiState.Error("Email already registered")
+                    ttsHelper.speak("Email already registered")
                     return@launch
                 }
 
@@ -64,9 +73,11 @@ class AuthViewModel @Inject constructor(
                 Log.d(TAG, "signup: Created user $id")
                 userRepository.saveUserSession(id)
                 _uiState.value = UiState.Success("Account created")
+                ttsHelper.speak("Account created successfully")
             } catch (e: Exception) {
                 Log.e(TAG, "signup: Error", e)
                 _uiState.value = UiState.Error(e.message ?: "Signup failed")
+                ttsHelper.speak("Signup failed")
             }
         }
     }

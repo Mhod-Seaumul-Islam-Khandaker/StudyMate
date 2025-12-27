@@ -8,6 +8,7 @@ import com.example.studymate.data.model.GoalStatus
 import com.example.studymate.data.repository.GoalRepository
 import com.example.studymate.data.repository.UserRepository
 import com.example.studymate.ui.common.UiState
+import com.example.studymate.utils.TextToSpeechHelper
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -20,7 +21,8 @@ import javax.inject.Inject
 @HiltViewModel
 class GoalsViewModel @Inject constructor(
     private val goalRepository: GoalRepository,
-    private val userRepository: UserRepository
+    private val userRepository: UserRepository,
+    private val ttsHelper: TextToSpeechHelper
 ) : ViewModel() {
 
     private val TAG = "GoalsViewModel"
@@ -70,6 +72,12 @@ class GoalsViewModel @Inject constructor(
             val updatedGoal = goal.copy(status = newStatus)
             Log.d(TAG, "updateGoalStatus: ${goal.id} -> $newStatus")
             goalRepository.updateGoal(updatedGoal)
+            
+            if (isCompleted) {
+                ttsHelper.speak("Goal completed: ${goal.statement}")
+            } else {
+                ttsHelper.speak("Goal marked as pending: ${goal.statement}")
+            }
         }
     }
 
@@ -77,6 +85,7 @@ class GoalsViewModel @Inject constructor(
         viewModelScope.launch {
             Log.d(TAG, "updateGoal: ${goal.id} - ${goal.statement}")
             goalRepository.updateGoal(goal)
+            ttsHelper.speak("Goal updated successfully")
         }
     }
 
@@ -84,6 +93,7 @@ class GoalsViewModel @Inject constructor(
         viewModelScope.launch {
             Log.d(TAG, "deleteGoal: ${goal.id}")
             goalRepository.deleteGoal(goal)
+            ttsHelper.speak("Goal deleted")
         }
     }
 
@@ -102,6 +112,7 @@ class GoalsViewModel @Inject constructor(
             )
             Log.d(TAG, "addGoal: Adding ${newGoal.statement}")
             goalRepository.insertGoal(newGoal)
+            ttsHelper.speak("Goal added successfully")
         }
     }
 }
